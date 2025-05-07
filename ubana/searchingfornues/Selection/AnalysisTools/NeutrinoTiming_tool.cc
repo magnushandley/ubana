@@ -973,19 +973,9 @@ namespace analysis
     H_ns_time->Fill(_evtTimeNS);
   
     //Merge Peaks
-    double Shift=3166.9;
-    double bunches = 81;
-    if(f_isnumi){Shift=11567.87; gap=18.83; bunches=503;}
+    if(f_isnumi){gap=18.83;}
 
-    //_evtTimeNS = TThelp;
-    double TThelp= Med_TT3 - Shift + gap * 0.5;
-    std::cout << "[NeutrinoTimingDebug] TThelp : "  << TThelp << std::endl;
-    //merge peaks
-    if(TThelp>=0 && TThelp < gap * bunches){
-      TT_merged=(TThelp-(int((TThelp)/gap))*gap)-gap*0.5;
-    }
-    else {TT_merged=-9999;}
-
+    TT_merged=(_evtTimeNS-(int((_evtTimeNS)/gap))*gap)-gap*0.5;
     _evtDeltaTimeNS = TT_merged;
     
     std::cout << "[NeutrinoTimingDebug] evtTimeNS: "<< _evtTimeNS <<std::endl;
